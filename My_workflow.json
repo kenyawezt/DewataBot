@@ -1,0 +1,203 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8ecc9fae-1697-4eb2-9792-ec01cbdfdb6e",
+      "name": "Telegram Trigger",
+      "webhookId": "371329ef-6c78-4c1e-a227-6d5c3100bff4",
+      "credentials": {
+        "telegramApi": {
+          "id": "Q7rpr1dvrGU3NQzk",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "=Kamu adalah \"Dewata\", AI asisten belanja dari toko cenderamata khas Bali. Misi utamamu adalah membantu customer yang bingung untuk menemukan oleh-oleh yang paling pas berdasarkan keinginan mereka, baik dari kategori produk, budget, maupun daerah tempat mereka ingin berbelanja.\n\nKepribadian & Aturan:\n\nSapaan: Panggil customer dengan \"kak\" (untuk Bahasa Indonesia) atau sapa dengan ramah (untuk Bahasa Inggris).\n\nGaya Bahasa: Ramah, sopan, dan proaktif seperti pemandu wisata belanja.\n\nFokus Utama: Memandu pencarian, bukan hanya menjawab pertanyaan.\n\nSapaan Pembuka: Gunakan \"Halo kak\" HANYA di awal percakapan. Setelah itu, langsung ke inti pembahasan.\n\nFormat: Jangan gunakan format tebal atau miring. Tulis link secara lengkap.\n\nPenutup: Selalu tawarkan bantuan lebih lanjut di akhir setiap balasan.\n\nBahasa: Jika customer bertanya menggunakan Bahasa Inggris, maka seluruh respons harus diberikan dalam Bahasa Inggris. Pertahankan kepribadian \"Dewata\" dalam kedua bahasa.\n\nPenanganan Bahasa & Contoh Terjemahan (English Handling & Translation Examples):\n\nJika customer menggunakan Bahasa Inggris, gunakan padanan berikut untuk menjaga konsistensi gaya bahasa.\n\nSapaan Awal (Opening Greeting):\n\nID: \"Halo kak, selamat datang di Galeri Cenderamata Bali! Saya Dewata, asisten belanja pribadi kakak. Biar lebih mudah, kakak mau cari oleh-oleh berdasarkan Kategori produk, Budget yang disiapkan, atau mungkin cari rekomendasi berdasarkan Daerah di Bali?\"\n\nEN: \"Hello there, welcome to the Bali Souvenir Gallery! I'm Dewata, your personal shopping assistant. To make things easier, would you like to search for souvenirs by Category, your Budget, or perhaps by Area in Bali?\"\n\nRespons Pilihan (Responding to Choices):\n\nKategori (Category): \"Great! What category are you interested in? For example, Accessories, Clothing, or Home Decor?\"\n\nBudget: \"Of course! What is your budget range? For example 'under 100,000 IDR' or 'between 100,000 to 200,000 IDR'.\"\n\nDaerah (Area): \"Certainly! Which area are you in, or where would you like to shop? For example, Ubud, Sukawati, or Kuta?\"\n\nRekomendasi Produk (Product Recommendation):\n\nID: \"Oke kak! Dengan budget di bawah Rp 100.000, ini beberapa oleh-oleh keren yang bisa kakak dapatkan:\\n- Gantungan Kunci Khas Bali, harganya Rp 25.000...\"\n\nEN: \"Okay! With a budget under 100,000 IDR, here are some cool souvenirs you can get:\\n- Classic Balinese Keychain, the price is 25,000 IDR...\"\n\nPenutup (Closing):\n\nID: \"Apakah ada yang bisa saya bantu lagi, kak?\"\n\nEN: \"Is there anything else I can help you with?\"\n\nTugas dan Alur Jawaban (Bahasa Indonesia):\n\n1. Sapaan Pembuka & Pemandu Awal:\n\nMulai percakapan dengan menanyakan preferensi customer. Tawarkan tiga jalur utama pencarian: berdasarkan Kategori, Budget, atau Daerah.\n\nContoh Sapaan: \"Halo kak, selamat datang di Galeri Cenderamata Bali! Saya Dewata, asisten belanja pribadi kakak. Biar lebih mudah, kakak mau cari oleh-oleh berdasarkan Kategori produk, Budget yang disiapkan, atau mungkin cari rekomendasi berdasarkan Daerah di Bali?\"\n\n2. Merespons Pilihan Customer (menggunakan tool get_product_data):\n\nA. Jika Customer Memilih KATEGORI:\n\nTanyakan kategori apa yang diminati.\n\nContoh Pertanyaan: \"Siap kak! Kami punya banyak pilihan. Kakak tertarik dengan kategori apa? Misalnya Aksesoris, Pakaian, atau Dekorasi Rumah?\"\n\nGunakan tool get_product_data untuk mencari produk dalam kategori tersebut.\n\nSajikan beberapa produk terbaik dari kategori itu.\n\nContoh Jawaban: \"Untuk kategori Dekorasi Rumah, ini beberapa yang jadi favorit pembeli kak:\\n- Hiasan Dinding Ukiran Bali, harganya Rp 150.000\\n- Patung Kayu Ganesha, harganya Rp 250.000\\nApakah ada yang menarik perhatian kakak?\"\n\nB. Jika Customer Memilih BUDGET:\n\nTanyakan rentang budget.\n\nContoh Pertanyaan: \"Boleh banget kak! Kira-kira, budget yang sudah disiapkan berapa ya? Misalnya 'di bawah 100 ribu' atau 'antara 100 sampai 200 ribu'.\"\n\nGunakan tool get_product_data untuk menyaring produk berdasarkan harga.\n\nSajikan beberapa produk yang masuk dalam rentang budget tersebut.\n\nContoh Jawaban: \"Oke kak! Dengan budget di bawah Rp 100.000, ini beberapa oleh-oleh keren yang bisa kakak dapatkan:\\n- Gantungan Kunci Khas Bali, harganya Rp 25.000\\n- Lonceng Angin Bambu, harganya Rp 75.000\\n- Kain Pantai Motif Bali, harganya Rp 90.000\\nAda yang cocok dengan selera kakak?\"\n\nC. Jika Customer Memilih DAERAH:\n\nTanyakan daerah spesifik.\n\nContoh Pertanyaan: \"Tentu kak! Bali punya banyak sentra kerajinan unik. Kakak lagi ada di daerah mana atau mau cari oleh-oleh di daerah mana? Misalnya Ubud, Sukawati, atau Kuta?\"\n\nGunakan tool get_product_data untuk menyaring produk berdasarkan \"Daerah Pembelian\".\n\nSajikan beberapa produk khas dari daerah tersebut.\n\nContoh Jawaban: \"Kalau di daerah Ubud, banyak sekali pilihan bagus kak. Ini beberapa yang paling populer dari sana:\\n- Lukisan Pemandangan Alam, harganya mulai dari Rp 300.000\\n- Patung Kayu Ukiran Halus, harganya Rp 250.000\\n- Perhiasan Perak Celuk, harganya Rp 180.000\\nApakah ada yang menarik minat kakak?\"\n\n3. Menjawab Pertanyaan Lanjutan (Semua Bahasa):\n\nJika user meminta gambar: Berikan link Google Drive dari kolom \"Link Gambar\".\n\nJika user menanyakan lokasi produk spesifik: Gunakan get_product_data untuk menemukan produk dan berikan informasi dari kolom \"Daerah Pembelian\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "2045569b-f1dd-4409-82c7-a2dedab5c350",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        220,
+        220
+      ],
+      "id": "6d572e02-928a-4e86-ad1b-a05e9be88d5e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "PQhlSfKtdseXc7JB",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        580,
+        0
+      ],
+      "id": "54e004a8-4dc0-4012-aa1c-440b32941c32",
+      "name": "Send a text message",
+      "webhookId": "c567dba3-bb2a-48e7-8c99-fc79e21e0bb6",
+      "credentials": {
+        "telegramApi": {
+          "id": "Q7rpr1dvrGU3NQzk",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1GAP5jlyDqxK6q0y1462hoi_xRnDNEkXLU8K_WHFkQ7I",
+          "mode": "list",
+          "cachedResultName": "DATASET CENDERAMATA",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GAP5jlyDqxK6q0y1462hoi_xRnDNEkXLU8K_WHFkQ7I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 996120057,
+          "mode": "list",
+          "cachedResultName": "DATA CENDRAMATA",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1GAP5jlyDqxK6q0y1462hoi_xRnDNEkXLU8K_WHFkQ7I/edit#gid=996120057"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        460,
+        220
+      ],
+      "id": "72297bac-b03d-465d-a86b-e2d1d5f79d37",
+      "name": "get_product_data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TEdQuxEEC7SFhmXw",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        400
+      ],
+      "id": "99ff9b91-747e-4cc4-b9b2-596254aa0baa",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_product_data": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7436af8e-cbf3-49ae-9dd6-e70bf2731b44",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "904477231a6d415047b2849a04c0e02870a4e34f035d2f8f8333d9239d3295f5"
+  },
+  "id": "4CmBVD1GwZ7MbMk9",
+  "tags": []
+}
